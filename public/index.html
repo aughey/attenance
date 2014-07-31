@@ -1,0 +1,26 @@
+<html>
+<head>
+	<script src="underscore-min.js"></script>
+	<script src="jquery-2.1.1.min.js"></script>
+  	<script src="ember/js/libs/handlebars-1.1.2.js"></script>
+	<script src="ember/js/libs/ember-1.6.1.js"></script>
+	<script src="ember-data.js"></script>
+	<script src="attendance.js"></script>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<script type="text/x-handlebars" data-template-name="students">
+	<section id="attendanceapp">
+	Name:
+<input id="name" />
+<ul id="found_names">
+	{{#each}}
+    <li>
+      {{name}} {{rank}}
+    </li>
+  {{/each}}
+	</ul>
+	</secction>
+	</script>
+</body>
+</html>
