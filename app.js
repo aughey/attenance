@@ -5,27 +5,43 @@ var app = express();
 // Configure the express server to serve files out of the public directory.
 app.use("/", express.static(__dirname + '/public'));
 
-app.get('/id', function(req, res) {
-    if (require_user(req, res)) {
-        return;
-    }
-    abstracts(function(col) {
 
-        col.findOne({
-            '_id': mid(req.query['id'] || "50b18c2679fa52622f000007")
-        }, function(err, doc) {
-            if (err) {
-                res.send("ERROR");
-            } else {
-                res.send(JSON.stringify(doc))
-            }
-        });
-    })
+app.get('/classs', function(req, res) {
+    res.send(JSON.stringify({
+        classs: classes
+    }));
+});
+
+app.get('/students', function(req, res) {
+    res.send(JSON.stringify({
+        students: students
+    }));
+});
+
+app.get('/classs/:id', function(req, res) {
+    var c = _.find(classes, function(c) {
+        return c.id == req.params.id;
+    });
+    c = {
+        class: c
+    };
+    console.log(c);
+    res.send(JSON.stringify(c));
+});
+
+app.get('/students/:id', function(req, res) {
+    var c = _.find(students, function(c) {
+        return c.id == req.params.id;
+    });
+    c = {
+        student: c
+    };
+    console.log(c);
+    res.send(JSON.stringify(c));
 });
 
 app.get('/get', function(req, res) {
-
-    var name = req.query['collection'] || 'geotiffs'
+    var name = req.query['collection']
     collection(name, function(col) {
         var q = req.query['q'];
         if (q) {
@@ -121,3 +137,44 @@ socketio.on('connection', function(socket) {
 webserver.listen(8888, function() {
     console.log("Server listening on port 8888")
 })
+
+var classes = [{
+    id: 1,
+    name: "Server Monday Morning 7am"
+}, {
+    id: 2,
+    name: "Monday Evening 6pm"
+}, {
+    id: 3,
+    name: "Tuesday Morning 7am"
+}, {
+    id: 4,
+    name: "Tuesday Evening 6pm"
+}, {
+    id: 5,
+    name: "Wednesday Evening Kids 5pm"
+}, {
+    id: 6,
+    name: "Wednesday Evening 6pm"
+}];
+
+var students = [{
+    id: 1,
+    name: "Server John Aughey",
+    rank: "2nd Kyu",
+    email: 'jha@aughey.com',
+    phone: '314-610-8764',
+    foobar: new Date,
+}, {
+    id: 2,
+    name: "John Feaster",
+    rank: "2nd Kyu",
+    email: 'jfeaster93@yahoo.com',
+    phone: '314-555-5555'
+}, {
+    id: 3,
+    name: "Dan Woods",
+    rank: "2nd Dan",
+    email: 'danwoods.gm@gmail.com',
+    phone: '314-555-5555'
+}];
