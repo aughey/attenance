@@ -5,20 +5,37 @@
   <title>Ember Starter Kit</title>
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
 </head>
 <body>
   <script type="text/x-handlebars">
-    <h2>Welcome to Ember.js</h2>
-
+  <div class="navbar">
+    <div class="navbar-inner">
+      <a class="brand" href="#">Attendance</a>
+      <ul class="nav">
+      <li>{{#link-to 'classes'}}Classes{{/link-to}}</li>
+      <li>{{#link-to 'history'}}History{{/link-to}}</li>
+      <li>{{#link-to 'about'}}About{{/link-to}}</li>
+    </div>
+  </div>
     {{outlet}}
   </script>
 
   <script type="text/x-handlebars" id="index">
+    <h1>index id</h1>
     <ul>
     {{#each item in model}}
       <li>{{item}}</li>
     {{/each}}
     </ul>
+  </script>
+
+  <script type="text/x-handlebars" id="about">
+    <div class="about">
+      This attendance program was created by John Aughey to keep a digital
+      record of attendance at periodic classes.  This data is use to understand
+      the makeup of a particular class, along with the attendance record of individuals.
+    </div>
   </script>
 
   <script src="js/libs/jquery-1.10.2.js"></script>
