@@ -1,4 +1,4 @@
-window.Attendances = Ember.Application.create();
+window.App = Ember.Application.create();
 
 Attendances.ApplicationAdapter = DS.FixtureAdapter.extend();
 
