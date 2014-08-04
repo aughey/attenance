@@ -59,9 +59,9 @@
     <div class="student">
     {{#if isEditing}}
       {{partial 'student/edit'}}
-      <button {{action 'doneEditing'}}>Done</button>
+      <button {{action 'doneEditing' this}}>Done</button>
     {{else}}
-      <button {{action 'edit'}}>Edit</button>
+      <button {{action 'edit' this}}>Edit</button>
     {{/if}}
       <h1>{{name}}</h1>
       E-mail: {{email}}

@@ -1,10 +1,11 @@
 var _ = require('./public/underscore-min')
 var express = require('express');
+var bodyParser = require('body-parser');
 var app = express();
 
 // Configure the express server to serve files out of the public directory.
 app.use("/", express.static(__dirname + '/public'));
-
+app.use(bodyParser.json());
 
 app.get('/classs', function(req, res) {
     res.send(JSON.stringify({
@@ -18,6 +19,20 @@ app.get('/students', function(req, res) {
     }));
 });
 
+app.put('/students/:id', function(req, res) {
+    var s = req.param('student');
+    var c = _.find(students, function(c) {
+        return c.id == req.params.id;
+    });
+    _.each(_.keys(c), function(k) {
+        if (k !== 'id') {
+            c[k] = s[k];
+        }
+    })
+    res.send("OK");
+    console.log(c);
+});
+
 app.get('/classs/:id', function(req, res) {
     var c = _.find(classes, function(c) {
         return c.id == req.params.id;
@@ -25,7 +40,6 @@ app.get('/classs/:id', function(req, res) {
     c = {
         class: c
     };
-    console.log(c);
     res.send(JSON.stringify(c));
 });
 
@@ -36,7 +50,6 @@ app.get('/students/:id', function(req, res) {
     c = {
         student: c
     };
-    console.log(c);
     res.send(JSON.stringify(c));
 });
 

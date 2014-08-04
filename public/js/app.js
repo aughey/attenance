@@ -36,6 +36,7 @@ App.ClassesRoute = Ember.Route.extend({
 
 App.StudentsRoute = Ember.Route.extend({
     model: function() {
+        console.log("finding student")
         return this.store.find('student');
     }
 });
@@ -47,8 +48,17 @@ App.StudentController = Ember.ObjectController.extend({
             this.set('isEditing', true);
         },
         doneEditing: function(s) {
-            this.set('isEditing', false);
-            console.log(this);
+            var me = this;
+            console.log('saving');
+            console.log(s)
+            var ret = s.save().then(function() {
+                console.log("saved");
+                _.delay(function() {
+                    console.log("done");
+                    me.set('isEditing', false);
+                }, 2000);
+            });
+            console.log(ret);
         }
     }
 });
